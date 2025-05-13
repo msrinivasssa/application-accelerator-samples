@@ -1,0 +1,113 @@
+---
+applications:
+  - name: where-for-dinner-availability
+    path: where-for-dinner-availability/target/where-for-dinner-availability-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    routes:
+      - route: where-for-dinner-availability.apps.internal
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka,mysql
+    services:
+      - where-for-dinner-mysql
+      - where-for-dinner-rabbitmq
+      - config
+      - registry
+
+  - name: where-for-dinner-crawler
+    path: where-for-dinner-crawler/target/where-for-dinner-crawler-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    routes:
+      - route: where-for-dinner-crawler.apps.internal
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka
+    services:
+      - config
+      - registry
+
+  - name: where-for-dinner-notify
+    path: where-for-dinner-notify/target/where-for-dinner-notify-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    routes:
+      - route: where-for-dinner-notify.apps.internal
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka
+    services:
+      - where-for-dinner-rabbitmq
+      - config
+      - registry
+
+  - name: where-for-dinner-search
+    path: where-for-dinner-search/target/where-for-dinner-search-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    routes:
+      - route: where-for-dinner-search.apps.internal
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka,mysql
+    services:
+      - where-for-dinner-mysql
+      - where-for-dinner-rabbitmq
+      - config
+      - registry
+
+  - name: where-for-dinner-search-proc
+    path: where-for-dinner-search-proc/target/where-for-dinner-search-proc-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    routes:
+      - route: where-for-dinner-search-proc.apps.internal
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka
+    services:
+      - where-for-dinner-rabbitmq
+      - config
+      - registry
+
+  - name: where-for-dinner-ui
+    path: where-for-dinner-ui/build/
+    instances: 1
+    buildpack: staticfile-buildpack
+    memory: 256M
+    routes:
+      - route: where-for-dinner-ui.apps.internal
+    services:
+      - config
+      - registry
+
+  - name: where-for-dinner-api-gateway
+    path: where-for-dinner-api-gateway/target/where-for-dinner-api-gateway-0.0.1-SNAPSHOT.jar
+    random-route: true
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka
+    services:
+      - config
+      - registry
