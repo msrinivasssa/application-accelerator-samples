@@ -89,7 +89,7 @@ applications:
   - name: where-for-dinner-ui
     path: where-for-dinner-ui/build/
     instances: 1
-    buildpack: staticfile-buildpack
+    buildpack: staticfile_buildpack
     memory: 256M
     routes:
       - route: where-for-dinner-ui.apps.internal

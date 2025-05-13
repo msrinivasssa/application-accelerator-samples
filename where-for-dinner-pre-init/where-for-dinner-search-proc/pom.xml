@@ -14,7 +14,7 @@
 	<name>where-for-dinner-search-proc</name>
 	<description>Where for Dinner search processor</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.1</spring-cloud.version>
 		<spring-cloud-bindings.version>2.0.3</spring-cloud-bindings.version>	
 		<cfenv.version>3.1.5</cfenv.version>	
