@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: where-for-dinner-ui
+    name: where-for-dinner-ui-backend
   cloud:
     inetutils:
       ignored-interfaces:
