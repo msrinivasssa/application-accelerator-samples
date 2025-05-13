@@ -102,9 +102,10 @@ applications:
       - registry
 
   - name: where-for-dinner-ui
-    path: where-for-dinner-ui/build/
+    path: where-for-dinner-ui-backend/target/where-for-dinner-ui-backend-0.0.1-SNAPSHOT.jar
     instances: 1
-    buildpack: staticfile_buildpack
+    buildpacks:
+      - java_buildpack_offline
     memory: 256M
     routes:
       - route: where-for-dinner-ui.apps.internal
