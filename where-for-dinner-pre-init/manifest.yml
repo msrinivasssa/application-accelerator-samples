@@ -1,5 +1,20 @@
 ---
 applications:
+  - name: where-for-dinner-api-gateway
+    path: where-for-dinner-api-gateway/target/where-for-dinner-api-gateway-0.0.1-SNAPSHOT.jar
+    random-route: true
+    buildpacks:
+      - java_buildpack_offline
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      SPRING_PROFILES_ACTIVE: cloud,eureka
+    services:
+      - config
+      - registry
+
   - name: where-for-dinner-availability
     path: where-for-dinner-availability/target/where-for-dinner-availability-0.0.1-SNAPSHOT.jar
     buildpacks:
@@ -97,17 +112,3 @@ applications:
       - config
       - registry
 
-  - name: where-for-dinner-api-gateway
-    path: where-for-dinner-api-gateway/target/where-for-dinner-api-gateway-0.0.1-SNAPSHOT.jar
-    random-route: true
-    buildpacks:
-      - java_buildpack_offline
-    health-check-type: http
-    health-check-http-endpoint: /actuator/health
-    env:
-      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
-      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
-      SPRING_PROFILES_ACTIVE: cloud,eureka
-    services:
-      - config
-      - registry

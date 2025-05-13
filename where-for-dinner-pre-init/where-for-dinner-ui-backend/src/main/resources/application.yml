@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: where-for-dinner-ui
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - docker0
+        - veth.*
+    discovery:
+      enabled: true
+
+---
+
+spring:
+  config.activate.on-profile: eureka
+
+eureka:
+  client:
+    enabled: true
