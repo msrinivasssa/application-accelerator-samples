@@ -40,7 +40,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 				<groupId>com.thoughtworks.xstream</groupId>
 				<artifactId>xstream</artifactId>
 				<version>${xstream.version}</version>
-			</dependency>						
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -104,6 +104,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

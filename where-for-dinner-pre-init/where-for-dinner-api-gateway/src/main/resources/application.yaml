@@ -1,8 +1,8 @@
-spring.cloud.kubernetes.enabled: false
-
 spring:
   application:
     name: where-for-dinner-api-gateway
+  config:
+    import: 'optional:configserver:'
 
   session:
     timeout: 60m
@@ -65,11 +65,11 @@ eureka:
 
 where-for-dinner:
   ui:
-    uri: lb://where-for-dinner-ui/
+    uri: lb:http://where-for-dinner-ui/
   search:
-    uri: lb://where-for-dinner-search/
+    uri: lb:http://where-for-dinner-search/
   availability:
-    uri: lb://where-for-dinner-availability/
+    uri: lb:http://where-for-dinner-availability/
 
 ---
 spring:
