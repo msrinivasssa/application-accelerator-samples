@@ -14,5 +14,6 @@
         <module>./where-for-dinner-notify</module>
         <module>./where-for-dinner-availability</module>
         <module>./where-for-dinner-crawler</module>
+        <module>./where-for-dinner-ui-backend</module>
   </modules>	 
 </project>
